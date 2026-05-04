@@ -1,0 +1,24 @@
+// prisma/schema.prisma
+// Learn more: https://www.prisma.io/docs
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Transaction {
+  id           Int       @id @default(autoincrement())
+  recipient    String
+  amount       Float
+  method       String
+  status       String    @default("pending")
+  riskScore    Int
+  riskLevel    String
+  riskFactors  String    // Comma-separated risk factors
+  createdAt    DateTime  @default(now())
+}
